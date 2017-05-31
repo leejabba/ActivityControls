@@ -14,7 +14,7 @@ startActivityForResult - Intent로 값 주고 받기
 - startActivityForResult 메서드에 인텐트와 번지수를 포함한 값을 argument로 담아 호출한다.
 
 
-**[MainActivity.java]**
+**[MainActivity.java] - 답장 달라는 내용으로 편지쓰기**
 ```java
 // Context와 액티비티 클래스 값을 담아 Intent 생성자를 호출한다.
 Intent intent = new Intent(this, DetailActivity.class);
@@ -53,4 +53,58 @@ if (bundle != null) {
 ```
 
 **[SubActivity.java] - 답장 보내기**
+```java
+/**
+* 인텐트의 값 반환하기 (답장 보내기)
+* 1. 결과값을 인텐트에 담는다.
+* 2. 값을 setResult 메서드를 이용해 넘겨준다.
+* 3. 액티비티를 종료한다.
+*/
 
+Intent intent = new Intent();
+// putExtra로 키 값과 내용 값을 담는다.
+intent.putExtra("result", resultValue);
+
+// 답장을 보낼 준비가 되었다는 의미. RESULT_OK는 상수로써 의미는 상수명에서 느낄 수 있다.
+setResult(RESULT_OK, intent);
+
+// (아마) commit하면서 액티비티를 닫는 역할을 하는 듯 하다.
+finish();
+
+```
+
+* * *
+
+
+## 3. 답장의 내용 확인
+- onActivityResult 메서드를 Override 한 후 어떻게 처리 할 것인지 정의한다.
+
+**[MainActivity.java] - 답장 확인하기**
+```java
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	super.onActivityResult(requestCode, resultCode, data);
+	// 답장의 setResult에서 어떤 코드를 보냈는지 체크 한다.
+	if (resultCode == RESULT_OK) {
+
+	// 원래 보냈던 편지의 요청코드 번호가 몇 번인지에 따라 행동을 다르게 설정한다.
+	// 앞에서 startActivityForResult(intent, 100); 로 설정했었다.
+	switch (resquestCode) {
+	case 100:
+	// 스트링 변수에 답장을 보낸 쪽의 putExtra 키 값의 내용을 담는다.
+	String result = data.getStringExtra("result");
+
+	Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+
+	break;
+}
+}
+}
+
+```
+
+* * *
+
+## 링크 : 전체 소스 코드 보기
+[MainActivity.java](https://github.com/leejabba/ActivityControls/blob/master/app/src/main/java/com/heythisway/activitycontrol/MainActivity.java)
+[SubActivity.java](https://github.com/leejabba/ActivityControls/blob/master/app/src/main/java/com/heythisway/activitycontrol/SubActivity.java)
