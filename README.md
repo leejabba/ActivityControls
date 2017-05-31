@@ -97,8 +97,8 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
 
 	break;
-}
-}
+    }
+  }
 }
 
 ```
@@ -106,5 +106,5 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 * * *
 
 ## 링크 : 전체 소스 코드 보기
-[MainActivity.java](https://github.com/leejabba/ActivityControls/blob/master/app/src/main/java/com/heythisway/activitycontrol/MainActivity.java)
-[SubActivity.java](https://github.com/leejabba/ActivityControls/blob/master/app/src/main/java/com/heythisway/activitycontrol/SubActivity.java)
+- [MainActivity.java](https://github.com/leejabba/ActivityControls/blob/master/app/src/main/java/com/heythisway/activitycontrol/MainActivity.java)
+- [SubActivity.java](https://github.com/leejabba/ActivityControls/blob/master/app/src/main/java/com/heythisway/activitycontrol/SubActivity.java)
